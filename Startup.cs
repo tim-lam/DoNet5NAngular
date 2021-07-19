@@ -1,6 +1,8 @@
+using CoreAn.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +27,9 @@ namespace CoreAn
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<NorthwindContext>(
+                options => options.UseSqlServer("name=ConnectionStrings:Northwind"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
