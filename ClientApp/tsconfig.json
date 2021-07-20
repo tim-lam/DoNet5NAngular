@@ -13,7 +13,7 @@
         "app/product/components/*"
       ],
       "services/*": [
-        "app/product/services/*"
+        "app/services/*"
       ]
 
       //"dashboard/*": ["app/dashboard/*"],

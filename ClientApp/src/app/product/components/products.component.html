@@ -1,4 +1,6 @@
-<table class="table table-hover">
+
+<product-detail  [product]="selectedProduct"></product-detail>
+<table class="table table-hover" >
   <thead>
   <th scope="col">
     productName
@@ -32,7 +34,7 @@
   <tr *ngIf="!products">
     <td colspan="10">Loading</td>
   </tr>
-  <tr *ngFor="let product of products">
+  <tr *ngFor="let product of products" (click)="selectProduct(product)" [ngClass]="{'table-active': product === selectedProduct}">
     <td>
       {{product.productName}}
     </td>
