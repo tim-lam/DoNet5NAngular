@@ -20,12 +20,11 @@
       //"heroes/*": ["app/heroes/*"],
       //"data-access/*": ["app/data-access/*"]
     },
-    "module": "esnext",
+    "module": "es2020",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
     "typeRoots": [
