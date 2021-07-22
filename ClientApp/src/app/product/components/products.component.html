@@ -1,5 +1,10 @@
 
-<product-detail  [product]="selectedProduct"></product-detail>
+<!--<product-detail  [product]="selectedProduct"></product-detail>-->
+<div>
+  <button type="button" class="btn btn-lg btn-primary">Add</button>
+  <button type="button" class="btn btn-lg btn-primary" [disabled]="!selectedProduct">Edit</button>
+  <button type="button" class="btn btn-lg btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct.productId)">Delete</button>
+</div>
 <table class="table table-hover" >
   <thead>
   <th scope="col">

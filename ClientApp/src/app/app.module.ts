@@ -10,7 +10,6 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductsComponent } from 'components/products.component';
-import { ProductDetailComponent } from 'components/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { ProductDetailComponent } from 'components/product-detail.component';
     CounterComponent,
     FetchDataComponent,
     ProductsComponent,
-    ProductDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +27,6 @@ import { ProductDetailComponent } from 'components/product-detail.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'products', component: ProductsComponent },
-      { path: 'product-detail', component: ProductDetailComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ])

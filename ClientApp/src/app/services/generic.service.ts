@@ -16,21 +16,34 @@ export class GenericService {
 
   constructor(private http: HttpClient) {}
 
-  get<T>(modelName: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}${modelName}`)
-      .pipe(
-        catchError(this.handleError('get', []))
-      );
+  get<T>(modelName: string, id? : number): Observable<T> {
+    let url = `${this.baseUrl}${modelName}`;
+    if (id) {
+      url = `${url}/${id}`;
+      console.log(url);
+      return this.http.get<T>(url)
+        .pipe(catchError(this.handleError<T>('get')));
+    } else {
+      console.log(url);
+      return this.http.get<T>(url)
+        .pipe(catchError(this.handleError<T>('get')));
+    }
+  }
+  getProducts(id: number): Observable<object[]> {
+    const url = `api/products`;
+    console.log(url);
+    return this.http.get<object[]>(url).pipe(catchError(this.handleError<any>(`getHero id=${id}`))
+    );
   }
 
-  add<T> (model: T, modelName:string): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}${modelName}`, model, httpOptions).pipe(
-      catchError(this.handleError<T>('add'))
+  add<T> (modelName:string, model: T): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}${modelName}`, model, httpOptions)
+      .pipe(catchError(this.handleError<T>('add'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  delete<T> (id: T, modelName: string): Observable<T> {
+  delete<T> (modelName: string, id: number): Observable<T> {
     const url = `${this.baseUrl}${modelName}/${id}`;
 
     return this.http.delete<T>(url, httpOptions)
