@@ -22,9 +22,10 @@ namespace CoreAn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+            //In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
+                // This is where files will be served from in non-Development environments
                 configuration.RootPath = "ClientApp/dist";
             });
 
@@ -42,13 +43,14 @@ namespace CoreAn
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseSpaStaticFiles();
+            //}
 
             app.UseRouting();
 
@@ -68,6 +70,7 @@ namespace CoreAn
 
                 if (env.IsDevelopment())
                 {
+                    //spa.UseWebpackDevelopmentServer(npmScriptName: "start");
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

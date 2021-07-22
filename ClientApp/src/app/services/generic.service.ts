@@ -30,7 +30,7 @@ export class GenericService {
     }
   }
   getProducts(id: number): Observable<object[]> {
-    const url = `api/products`;
+    const url = `api/products/1`;
     console.log(url);
     return this.http.get<object[]>(url).pipe(catchError(this.handleError<any>(`getHero id=${id}`))
     );
