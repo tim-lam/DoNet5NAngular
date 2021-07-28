@@ -5,7 +5,7 @@
   <button type="button" class="btn btn-lg btn-primary" [disabled]="!selectedProduct">Edit</button>
   <button type="button" class="btn btn-lg btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct.productId)">Delete</button>
 </div>-->
-<a class="nav-link text-dark" [routerLink]="['/addProduct']">Add</a>
+<a class="btn btn-primary" [routerLink]="['/addProduct']">Add</a>
 <table class="table table-hover" >
   <thead>
   <th scope="col">
@@ -64,12 +64,12 @@
     <td>
       {{product.discontinued}}
     </td>
-    <td>
+   <!-- <td>
       {{product.category.categoryName}}
     </td>
     <td>
       {{product.supplier.companyName}}
-    </td>
+    </td>-->
   </tr>
   </tbody>
 </table>

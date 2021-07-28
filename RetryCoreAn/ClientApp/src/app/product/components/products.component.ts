@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GenericService  } from 'services/generic.service';
+import { ProductsService  } from 'services/products.service';
+import { Product } from "product/product";
 
 @Component({
   selector: 'app-products',
@@ -7,21 +8,19 @@ import { GenericService  } from 'services/generic.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: object[];
+  products: Product[];
   selectedProduct: object;
 
-  constructor(private readonly genericService: GenericService) {}
+  constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit() {
     this.getProducts();
   }
   getProducts(): void {
-    this.genericService.get<object[]>('products')
+    this.productsService.getAll()
       .subscribe(products => this.products = products);
   }
-  deleteProduct(id: number): void {
-    this.genericService.getProducts( id);
-  }
+  
   selectProduct(product: object): void {
     this.selectedProduct = product;
     console.log(this.selectedProduct);

@@ -13,7 +13,9 @@
         "app/product/components/*"
       ],
       "services/*": [
-        "app/services/*"
+        "app/services/*",
+        "app/product/services/*"
+
       ]
     },
     "module": "esnext",
