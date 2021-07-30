@@ -7,21 +7,21 @@ namespace RetryCoreAn.Controllers
 {
  
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GenericController<T> : ControllerBase where T : class
     {
-        private readonly DbContext _context;
+        protected readonly DbContext Context;
 
         public GenericController (DbContext context)
         {
-           _context = context;
+           Context = context;
         }
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get() 
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get() 
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Context.Set<T>().ToListAsync();
         }
 
         //// GET: api/Products/5

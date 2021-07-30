@@ -5,7 +5,7 @@ import { Product } from 'models/product';
 
 @Injectable()
 export class ProductsService extends GenericService<Product> {
-  constructor(http: HttpClient) { super(http, 'products'); }
+  constructor(http: HttpClient) { super(http, 'api/products'); }
 }
 
 
