@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ProductsComponent } from './product/components/products.component';
+import { ProductsComponent } from 'components/products.component';
+import { ProductComponent } from"components/product.component";
 import { ProductsService } from 'services/products.service';
+import { CategoriesService } from 'services/categories.service';
+import { SuppliersService } from 'services/suppliers.service';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { ProductsService } from 'services/products.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,10 +33,10 @@ import { ProductsService } from 'services/products.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'products', component: ProductsComponent },
       { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'fetch-data', component: FetchDataComponent }
     ])
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, CategoriesService, SuppliersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

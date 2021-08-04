@@ -7,15 +7,18 @@
         "app/*"
       ],
       "models/*": [
-        "app/product/*.ts"
+        "app/product/*.ts",
+        "app/category/*.ts",
+        "app/supplier/*.ts"
       ],
       "components/*": [
         "app/product/components/*"
       ],
       "services/*": [
         "app/services/*",
-        "app/product/services/*"
-
+        "app/product/services/*",
+        "app/category/services/*",
+        "app/supplier/services/*"
       ]
     },
     "module": "esnext",

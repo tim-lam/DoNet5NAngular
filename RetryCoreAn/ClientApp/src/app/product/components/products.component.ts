@@ -9,7 +9,7 @@ import { Product } from "product/product";
 })
 export class ProductsComponent implements OnInit {
   products: Product[];
-  selectedProduct: object;
+  selectedProduct: Product;
 
   constructor(private readonly productsService: ProductsService) {}
 
@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(products => this.products = products);
   }
   
-  selectProduct(product: object): void {
+  selectProduct(product: Product): void {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
   }
