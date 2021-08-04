@@ -1,6 +1,6 @@
-<app-product *ngIf="selectedProduct" [model]="selectedProduct"></app-product>
+<app-product *ngIf="selectedProduct" [model]="selectedProduct" (addProductEvent)="addProduct($event)"></app-product>
 <div>
-  <button type="button" class="btn btn-primary" (click)="addProduct()">Add</button>
+  <button type="button" class="btn btn-primary" (click)="initProduct()">Add</button>
   <button type="button" class="btn btn-primary" [disabled]="!selectedProduct">Edit</button>
   <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct.productId)">Delete</button>
 </div>
@@ -64,10 +64,10 @@
       {{product.discontinued}}
     </td>
     <td>
-      {{product.category.categoryName}}
+      {{product.category ? product.category.categoryName : ""}}
     </td>
     <td>
-      {{product.supplier.companyName}}
+      {{product.supplier ? product.supplier.companyName : ""}}
     </td>
   </tr>
   </tbody>

@@ -28,7 +28,7 @@ namespace RetryCoreAn.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> Get(int id)
+        public virtual async Task<ActionResult<T>> Get(int id)
         {
             var product = await Context.Set<T>().FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace RetryCoreAn.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, T model)
+        public virtual async Task<ActionResult<T>> Put(int id, T model)
         {
             if (Context.Entry(model).IsKeySet)
             {
@@ -66,13 +66,13 @@ namespace RetryCoreAn.Controllers
                 throw;
             }
 
-            return NoContent();
+            return CreatedAtAction("Get", new {id}, model);
         }
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<T>> PostProduct(T model)
+        public virtual async Task<ActionResult<T>> PostProduct(T model)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace RetryCoreAn.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             var model = await Context.Set<T>().FindAsync(id);
             if (model == null)

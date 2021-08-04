@@ -52,5 +52,11 @@ namespace RetryCoreAn.Controllers
 
                 return qry.ToList(); // await Context.Set<Product>().Include(x => x.Category).Include(x => x.Supplier).ToListAsync();
         } 
+
+        //[HttpPut("{id}")]
+        //public override async Task<ActionResult<Product>> Get(int id)
+        //{
+        //    var product = await base.Get(id);
+        //} 
     }
 }

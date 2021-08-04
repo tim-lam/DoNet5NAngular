@@ -25,7 +25,11 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
   }
-  addProduct(): void {
+  initProduct(): void {
     this.selectedProduct = new Product();
+  }
+
+  addProduct(product: Product): void {
+    this.products.push(product);
   }
 }

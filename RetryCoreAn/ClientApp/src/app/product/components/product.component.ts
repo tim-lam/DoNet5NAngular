@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input , Output, EventEmitter} from '@angular/core';
 import { SuppliersService  } from 'services/suppliers.service';
 import { CategoriesService  } from 'services/categories.service';
 import { ProductsService } from 'services/products.service';
@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   @Input() model: Product;
   categories: Category[];
   suppliers: Supplier[];
+  @Output() addProductEvent = new EventEmitter<Product>();
 
   constructor(
     private readonly location: Location,
@@ -41,10 +42,19 @@ export class ProductComponent implements OnInit {
       .subscribe(suppliers => this.suppliers = suppliers);
   }
 
+  addProduct(value: Product) {
+    this.addProductEvent.emit(value);
+  }
+
   save(): void {
     if (this.model.productId === undefined) {
       this.productsService.add(this.model)
-        .subscribe(() => this.location.back());
+        .subscribe(product => {
+            product.category = this.model.category;
+            product.supplier = this.model.supplier;
+            this.addProductEvent.emit(product);
+          }
+        );
     } else {
       this.productsService.update(this.model.productId, this.model)
         .subscribe(() => this.location.back());
