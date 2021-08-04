@@ -18,14 +18,14 @@
     </div>
   </div>
 </div>
-<div>
+<div style="position: sticky; top: 0; background-color: white; height: 53px; padding-top: 8px; width: 100%;">
   <button type="button" class="btn btn-primary" (click)="initProduct()" data-toggle="modal" data-target="#exampleModal">Add</button>
   <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" data-toggle="modal" data-target="#exampleModal">Edit</button>
-  <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct.productId)">Delete</button>
+  <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct)">Delete</button>
 </div>
 
 <table class="table table-hover" >
-  <thead>
+  <thead style="position: sticky; top:53px">
   <th scope="col">
     productName
   </th>
@@ -91,7 +91,3 @@
   </tr>
   </tbody>
 </table>
-<div>
-</div>
-
-

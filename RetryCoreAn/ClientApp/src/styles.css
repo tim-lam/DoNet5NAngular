@@ -14,3 +14,13 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+div > * {
+  margin: 0 4px 5px 5px;
+}
+.sticky {
+  position: sticky;
+  top: 0
+}
+thead > th {
+  background-color: cornflowerblue
+}

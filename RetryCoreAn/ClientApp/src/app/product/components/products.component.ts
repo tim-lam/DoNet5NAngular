@@ -20,16 +20,25 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAll()
       .subscribe(products => this.products = products);
   }
-  
+
   selectProduct(product: Product): void {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
   }
+
   initProduct(): void {
     this.selectedProduct = new Product();
   }
 
   addProduct(product: Product): void {
     this.products.push(product);
+  }
+
+  deleteProduct(product: Product): void {
+    this.productsService.delete(product.productId)
+      .subscribe(() => {
+        var idx = this.products.indexOf(product);
+        this.products.splice(idx, 1);
+      });
   }
 }
