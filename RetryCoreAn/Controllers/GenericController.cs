@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,81 +26,94 @@ namespace RetryCoreAn.Controllers
             return await Context.Set<T>().ToListAsync();
         }
 
-        //// GET: api/Products/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
+        // GET: api/Products/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<T>> Get(int id)
+        {
+            var product = await Context.Set<T>().FindAsync(id);
 
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-        //    return product;
-        //}
+            return product;
+        }
 
-        //// PUT: api/Products/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutProduct(int id, Product product)
-        //{
-        //    if (id != product.ProductId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Products/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, T model)
+        {
+            if (Context.Entry(model).IsKeySet)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(product).State = EntityState.Modified;
+            Context.Entry(model).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ProductExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await Context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await ModelExists(id))
+                {
+                    return NotFound();
+                }
 
-        //    return NoContent();
-        //}
+                throw;
+            }
 
-        //// POST: api/Products
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Product>> PostProduct(Product product)
-        //{
-        //    _context.Products.Add(product);
-        //    await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
-        //    return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
-        //}
+        // POST: api/Products
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<T>> PostProduct(T model)
+        {
+            try
+            {
+                Context.Set<T>().Add(model);
 
-        //// DELETE: api/Products/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
+                await Context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest(ex.InnerException);
+            }
+            catch (Exception ex)
+            {
+                return UnprocessableEntity(ex);
+            }
+            
+            var keyProperty = Context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties.Single();
 
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
+            var id = (int) keyProperty.PropertyInfo.GetValue(model);
 
-        //    return NoContent();
-        //}
+            return CreatedAtAction("Get", new {id}, model);
+        }
 
-        //private bool ProductExists(int id)
-        //{
-        //    return _context.Products.Any(e => e.ProductId == id);
-        //}
+        // DELETE: api/Products/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await Context.Set<T>().FindAsync(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            Context.Set<T>().Remove(model);
+            await Context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private async Task<bool> ModelExists(int id)
+        {
+            return  await Context.Set<T>().FindAsync(id) != null;
+        }
     }
 }

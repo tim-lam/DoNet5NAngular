@@ -18,12 +18,13 @@ export class GenericService<T> {
 
   get(id?: number): Observable<T> {
     const url = `${this.baseUrl}/${id}`;
+
     return this.http.get<T>(url)
       .pipe(catchError(this.handleError<T>('get')));
   }
 
-  add(modelName: string, model: T): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}${modelName}`, model, httpOptions)
+  add(model: T): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}`, model, httpOptions)
       .pipe(catchError(this.handleError<T>('add'))
       );
   }
@@ -37,8 +38,10 @@ export class GenericService<T> {
   }
 
   /** PUT: update the hero on the server */
-  update(model: T): Observable<any> {
-    return this.http.put(`${this.baseUrl}`, model, httpOptions)
+  update(id: number, model: T): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.http.put(url, model, httpOptions)
       .pipe(catchError(this.handleError('update')));
   }
 
