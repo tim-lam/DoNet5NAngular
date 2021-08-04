@@ -50,9 +50,10 @@ export class ProductComponent implements OnInit {
     if (this.model.productId === undefined) {
       this.productsService.add(this.model)
         .subscribe(product => {
-            product.category = this.model.category;
-            product.supplier = this.model.supplier;
+            product.category = this.categories.find(x => x.categoryId === product.categoryId);
+            product.supplier = this.suppliers.find(x => x.supplierId === product.supplierId);
             this.addProductEvent.emit(product);
+
           }
         );
     } else {
