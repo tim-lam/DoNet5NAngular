@@ -1,5 +1,6 @@
-<!-- Modal -->
 <div class="content">
+  <!--
+
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -19,7 +20,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
   <div class="button-bar">
     <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"
             (click)="initProduct()">
@@ -36,13 +37,7 @@
             [disabled]="!selectedProduct">
       <span class="mat-button-wrapper">Delete</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span>
     </button>
- </div>
-
-
-  <div style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="!products">
-    <mat-spinner></mat-spinner>
   </div>
-
   <mat-table matSort  [dataSource]="products" class="ng-star-inserted">
     <ng-container matColumnDef="productName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> productName </mat-header-cell>
@@ -94,4 +89,7 @@
              (click)="selectProduct(product)"
              [ngClass]="{'highlightTableColor': selectedProduct == product}"></mat-row>
   </mat-table>
+  <div style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="!products">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>

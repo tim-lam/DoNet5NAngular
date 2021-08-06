@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService  } from 'services/products.service';
 import { Product } from "product/product";
+import { MatDialogRef,MatDialog } from '@angular/material/dialog';
+import { ProductComponent } from "components/product.component";
+
 
 @Component({
   selector: 'app-products',
@@ -11,7 +14,7 @@ export class ProductsComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
 
-  constructor(private readonly productsService: ProductsService) {}
+  constructor( public dialog: MatDialog, private readonly productsService: ProductsService) {}
 
   ngOnInit() {
     this.getProducts();
@@ -28,10 +31,14 @@ export class ProductsComponent implements OnInit {
 
   initProduct(): void {
     this.selectedProduct = new Product();
+    const dialogRef = this.dialog.open(ProductComponent, {
+      data: this.selectedProduct 
+    });
   }
 
   addProduct(product: Product): void {
     this.products.push(product);
+    
   }
 
   deleteProduct(product: Product): void {

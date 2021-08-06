@@ -1,22 +1,3 @@
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-
-// @NgModule({
-//   declarations: [
-//     AppComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -39,7 +20,7 @@ import { MatSortModule }from '@angular/material/sort';
 //import { GenericService } from 'services/generic.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { MatDialogModule } from '@angular/material/dialog';
 const routes:Routes=[
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {path: 'products', component: ProductsComponent}];
@@ -62,7 +43,8 @@ const routes:Routes=[
     MatTableModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   exports: [RouterModule],
   providers: [ProductsService, CategoriesService, SuppliersService],

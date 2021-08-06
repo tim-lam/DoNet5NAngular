@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
@@ -299,14 +301,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
 }
 .mat-header-row {
-    top:70px !important;
+    top:55px !important;
 }
 .button-bar {
   width: calc(~'100% - 100px');
   position: sticky !important;
   top: 0;
   background-color: white;
-  padding:20px;
+}
+
+.button-bar button {
+    margin: 10px;
 }
 
 .highlightTableColor{
