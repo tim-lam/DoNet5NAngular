@@ -1,41 +1,56 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+
+// @NgModule({
+//   declarations: [
+//     AppComponent
+//   ],
+//   imports: [
+//     BrowserModule,
+//     AppRoutingModule
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent]
+// })
+// export class AppModule { }
+
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductsComponent } from 'components/products.component';
 import { ProductComponent } from"components/product.component";
 import { ProductsService } from 'services/products.service';
 import { CategoriesService } from 'services/categories.service';
 import { SuppliersService } from 'services/suppliers.service';
-
+import { HomeComponent } from 'home/home.component';
+//import { GenericService } from 'services/generic.service';
+const routes:Routes=[
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  {path: 'products', component: ProductsComponent}];
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ProductsComponent,
     ProductComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'products', component: ProductsComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent }
-    ])
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [ProductsService, CategoriesService, SuppliersService],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -9,8 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class GenericService<T> {
-
-  constructor(private http: HttpClient, private baseUrl: string) {}
+  constructor(private http: HttpClient, @Inject('baseUrl') private baseUrl: string) {}
 
   getAll(id?: number): Observable<T[]> {
     return this.http.get<T[]>(this.baseUrl).pipe(catchError(this.handleError('get', [])));

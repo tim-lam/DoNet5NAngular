@@ -12,24 +12,22 @@ export class Product {
   unitsOnOrder ?: number;
   reorderLevel ?: number;
   discontinued: boolean;
-  
-  private _category?: Category;
-  private _supplier ?: Supplier;
 
-  get category() { return this._category; }
+  private _category: Category| undefined;
+  private _supplier : Supplier|undefined;
 
-  set category(value: Category) {
+  get category() : Category|undefined { return this._category; }
 
+  set category(value: Category|undefined) {
     this._category = value;
     if (this._category) {
       this.categoryId = this._category.categoryId;
     }
   }
 
-  get supplier() { return this._supplier; }
+  get supplier() : Supplier|undefined { return this._supplier; }
 
-  set supplier(value: Supplier) {
-
+  set supplier(value: Supplier|undefined) {
     this._supplier = value;
     if (this._supplier) {
       this.supplierId = this._supplier.supplierId;
