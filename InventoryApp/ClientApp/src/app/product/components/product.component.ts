@@ -6,6 +6,7 @@ import { Product } from 'models/product';
 import { Category } from 'models/category';
 import { Supplier } from 'models/supplier';
 import { Location } from '@angular/common';
+/*import {MatDialog} from '@angular/material/dialog';*/
 
 @Component({
   selector: 'app-product',
@@ -50,8 +51,8 @@ export class ProductComponent implements OnInit {
     if (this.model.productId === undefined) {
       this.productsService.add(this.model)
         .subscribe(product => {
-            product.category = this.categories.find(x => x.categoryId === product.categoryId);
-            product.supplier = this.suppliers.find(x => x.supplierId === product.supplierId);
+            product.category = this.categories.filter(x => x.categoryId === product.categoryId)[0];
+            product.supplier = this.suppliers.filter(x => x.supplierId === product.supplierId)[0];
             this.addProductEvent.emit(product);
 
           }

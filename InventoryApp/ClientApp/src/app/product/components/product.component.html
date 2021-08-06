@@ -1,4 +1,6 @@
-<div class="container">
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Develop across all platforms</h3>
   <div class="form-group">
     <label>productName:</label>
     <input  class="form-control" type="text" [(ngModel)]="model.productName"/>
@@ -42,7 +44,13 @@
   <div class="form-group form-check">
     <input class="form-check-input"  type="checkbox" [(ngModel)]="model.discontinued" /><label>discontinued</label>
   </div>
+</mat-dialog-content>
+<div class="container">
+  
   <button class="btn btn-primary" (click)="save()">Save</button>
 </div>
-
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>
 
