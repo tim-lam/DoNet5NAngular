@@ -31,7 +31,15 @@ import { ProductsService } from 'services/products.service';
 import { CategoriesService } from 'services/categories.service';
 import { SuppliersService } from 'services/suppliers.service';
 import { HomeComponent } from 'home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule }from '@angular/material/sort';
 //import { GenericService } from 'services/generic.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 const routes:Routes=[
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {path: 'products', component: ProductsComponent}];
@@ -48,7 +56,13 @@ const routes:Routes=[
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatTableModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   exports: [RouterModule],
   providers: [ProductsService, CategoriesService, SuppliersService],

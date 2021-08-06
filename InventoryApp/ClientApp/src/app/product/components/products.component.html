@@ -1,93 +1,88 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-product *ngIf="selectedProduct" [model]="selectedProduct" (addProductEvent)="addProduct($event)"></app-product>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="mat-focus-indicator mat-stroked-button mat-button-base" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="content">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-product *ngIf="selectedProduct" [model]="selectedProduct" (addProductEvent)="addProduct($event)"></app-product>
+        </div>
+        <div class="modal-footer">
+          <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"><span class="mat-button-wrapper">Basic</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span></button>
+          <button type="button" class="mat-focus-indicator mat-stroked-button mat-button-base" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
+  <div class="button-bar">
+    <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"
+            (click)="initProduct()">
+      <span class="mat-button-wrapper">Add</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="initProduct()" data-toggle="modal" data-target="#exampleModal">Add</button>
+    <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" data-toggle="modal" data-target="#exampleModal">Edit</button>
+    <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct)">Delete</button>
+  </div>
+
+
+  <div style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="!products">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-table matSort  [dataSource]="products" class="ng-star-inserted">
+    <ng-container matColumnDef="productName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> productName </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.productName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantityPerUnit">
+      <mat-header-cell *matHeaderCellDef> quantityPerUnit </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.quantityPerUnit}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="unitPrice">
+      <mat-header-cell *matHeaderCellDef> unitPrice </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.unitPrice}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unitsInStock">
+      <mat-header-cell *matHeaderCellDef> unitsInStock </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.unitsInStock}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unitsOnOrder">
+      <mat-header-cell *matHeaderCellDef> unitsOnOrder </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.unitsOnOrder}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reorderLevel">
+      <mat-header-cell *matHeaderCellDef> reorderLevel </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.reorderLevel}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="discontinued">
+      <mat-header-cell *matHeaderCellDef> discontinued </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.discontinued}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef> category </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.category ? product.category.categoryName : ""}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="supplier">
+      <mat-header-cell *matHeaderCellDef> supplier </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.supplier ? product.supplier.companyName : ""}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['productName','quantityPerUnit','unitPrice','unitsInStock','unitsOnOrder','reorderLevel','discontinued','category','supplier'] sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let product; columns['productName','quantityPerUnit','unitPrice','unitsInStock','unitsOnOrder','reorderLevel','discontinued','category','supplier']"></mat-row>
+  </mat-table>
 </div>
-<div style="position: sticky; top: 0; background-color: white; height: 53px; padding-top: 8px; width: 100%;">
-  <button type="button" class="btn btn-primary" (click)="initProduct()" data-toggle="modal" data-target="#exampleModal">Add</button>
-  <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" data-toggle="modal" data-target="#exampleModal">Edit</button>
-  <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct)">Delete</button>
-</div>
-
-<table class="table table-hover" >
-  <thead style="position: sticky; top:53px">
-  <th scope="col">
-    productName
-  </th>
-  <th scope="col">
-    quantityPerUnit
-  </th>
-  <th  scope="col">
-    unitPrice
-  </th>
-  <th  scope="col">
-    unitsInStock
-  </th>
-  <th  scope="col">
-    unitsOnOrder
-  </th>
-  <th  scope="col">
-    reorderLevel
-  </th>
-  <th  scope="col">
-    discontinued
-  </th>
-  <th  scope="col">
-    category
-  </th>
-  <th  scope="col">
-    supplier
-  </th>
-  </thead>
-  <tbody>
-  <tr *ngIf="!products">
-    <td colspan="10">Loading</td>
-  </tr>
-  <tr *ngFor="let product of products" (click)="selectProduct(product)" [ngClass]="{'table-active': product === selectedProduct}">
-    <td>
-      {{product.productName}}
-    </td>
-    <td>
-      {{product.quantityPerUnit}}
-    </td>
-    <td>
-      {{product.unitPrice}}
-    </td>
-    <td>
-      {{product.unitsInStock}}
-    </td>
-    <td>
-      {{product.unitsOnOrder}}
-    </td>
-
-    <td>
-      {{product.reorderLevel}}
-    </td>
-
-    <td>
-      {{product.discontinued}}
-    </td>
-    <td>
-      {{product.category ? product.category.categoryName : ""}}
-    </td>
-    <td>
-      {{product.supplier ? product.supplier.companyName : ""}}
-    </td>
-  </tr>
-  </tbody>
-</table>
