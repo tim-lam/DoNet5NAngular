@@ -23,13 +23,20 @@
   <div class="button-bar">
     <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"
             (click)="initProduct()">
-      <span class="mat-button-wrapper">Add</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span>
+      <span class="mat-button-wrapper">Add</span>
+      <span matripple="" class="mat-ripple mat-button-ripple"></span>
+      <span class="mat-button-focus-overlay"></span>
     </button>
 
-    <button type="button" class="btn btn-primary" (click)="initProduct()" data-toggle="modal" data-target="#exampleModal">Add</button>
-    <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" data-toggle="modal" data-target="#exampleModal">Edit</button>
-    <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="deleteProduct(selectedProduct)">Delete</button>
-  </div>
+    <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"
+            [disabled]="!selectedProduct">
+      <span class="mat-button-wrapper">Edit</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span>
+    </button>
+    <button _ngcontent-utq-c135="" mat-raised-button="" class="mat-focus-indicator mat-raised-button mat-button-base"
+            [disabled]="!selectedProduct">
+      <span class="mat-button-wrapper">Delete</span><span matripple="" class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span>
+    </button>
+ </div>
 
 
   <div style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="!products">
@@ -83,6 +90,8 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="['productName','quantityPerUnit','unitPrice','unitsInStock','unitsOnOrder','reorderLevel','discontinued','category','supplier'] sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let product; columns['productName','quantityPerUnit','unitPrice','unitsInStock','unitsOnOrder','reorderLevel','discontinued','category','supplier']"></mat-row>
+    <mat-row *matRowDef="let product; columns['productName','quantityPerUnit','unitPrice','unitsInStock','unitsOnOrder','reorderLevel','discontinued','category','supplier']"
+             (click)="selectProduct(product)"
+             [ngClass]="{'highlightTableColor': selectedProduct == product}"></mat-row>
   </mat-table>
 </div>
