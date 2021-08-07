@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
     private readonly suppliersService: SuppliersService) {
     if (model.productId) {
       this.title = "Edit Product";
-      this.description = "Updating the product";
+      this.description = `Updating the product, ${model.productId}`;
     } else {
       this.title = "Add Product";
       this.description = "Creating a new product";

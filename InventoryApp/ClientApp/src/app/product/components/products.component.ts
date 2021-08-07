@@ -47,15 +47,16 @@ export class ProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(ret => {
       var product = ret as Product;
-      if (product && product.productId) {
-        this.productsService.update(product.productId, product)
-          .subscribe(resp => product = resp);
-      } else {
-        this.productsService.add(product)
-          .subscribe(resp => this.products.push(resp));
-        this.table.renderRows();
+      if (product) {
+        if (product.productId) {
+          this.productsService.update(product.productId, product)
+            .subscribe(resp => product = resp);
+        } else {
+          this.productsService.add(product)
+            .subscribe(resp => this.products.push(resp));
+          this.table.renderRows();
+        }
       }
-
     });
   }
 

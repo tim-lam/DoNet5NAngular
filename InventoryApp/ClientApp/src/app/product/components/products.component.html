@@ -30,7 +30,9 @@
     
     <ng-container matColumnDef="unitPrice">
       <mat-header-cell *matHeaderCellDef> unitPrice </mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{product.unitPrice}} </mat-cell>
+      <mat-cell *matCellDef="let product">
+        {{product.unitPrice}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="unitsInStock">
