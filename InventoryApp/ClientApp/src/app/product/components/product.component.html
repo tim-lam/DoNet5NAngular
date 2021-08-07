@@ -1,51 +1,68 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Develop across all platforms</h3>
-  <div class="form-group">
-    <label>productName:</label>
-    <input  class="form-control" type="text" [(ngModel)]="model.productName"/>
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content class="mat-typography" class="dialog">
+  <h3>{{description}}</h3>
+
+  <div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Product Name</mat-label>
+      <input matInput placeholder="What's product name" [(ngModel)]="model.productName"/>
+      <!-- <mat-hint>Hint</mat-hint>-->
+    </mat-form-field>
   </div>
-  <div class="form-group">
-    <label >category:</label>
-    <select class="form-control" [(ngModel)]="model.categoryId" >
-      <option *ngFor="let category of categories" [ngValue]="category.categoryId" > 
-        {{category.categoryName}}
-      </option>
-    </select>
+  <div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select [ngModel]="model.categoryId">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.categoryId"> 
+          {{category.categoryName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div class="form-group">
-    <label >supplier:</label>
-    <select class="form-control" [ngModel]="model.supplierId">
-      <option *ngFor="let supplier of suppliers" [ngValue]="supplier.supplierId">
-        {{supplier.companyName}}
-      </option>
-    </select>
+  <div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Supplier</mat-label>
+      <mat-select [ngModel]="model.supplierId">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.supplierId"> 
+          {{supplier.companyName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div class="form-group">
-    <label>quantityPerUnit:</label>
-    <input class="form-control" type="text" [(ngModel)]="model.quantityPerUnit" />
-  </div>
-  <div class="form-group">
-    <label>unitPrice:</label> 
-    <input class="form-control" type="number" [(ngModel)]="model.unitPrice" />
-  </div>
-  <div class="form-group">
-    <label>unitsInStock:</label>
-    <input  class="form-control" type="number" [(ngModel)]="model.unitsInStock"/>
-  </div>
-  <div class="form-group">
-    <label>unitsOnOrder:</label>
-    <input class="form-control" type="number" [(ngModel)]="model.unitsOnOrder"/>
-  </div>
-  <div class="form-group">
-    <label >reorderLevel:</label>
-    <input class="form-control"  type="number" [(ngModel)]="model.reorderLevel" />
-  </div>
-  <div class="form-group form-check">
-    <input class="form-check-input"  type="checkbox" [(ngModel)]="model.discontinued" /><label>discontinued</label>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantity Per Unit</mat-label>
+      <input matInput placeholder="What's quantity per unit"
+             [(ngModel)]="model.quantityPerUnit"/>
+      <!-- <mat-hint>Hint</mat-hint>-->
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Unit Price</mat-label>
+      <input matInput type="number" placeholder="0"
+             [(ngModel)]="model.unitPrice" />
+      <span matSuffix>.00</span>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="outline" >
+      <mat-label>Units In Stock</mat-label>
+      <input matInput type="number" placeholder="0"
+             [(ngModel)]="model.unitsInStock" />
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="outline" >
+      <mat-label>Units On Order</mat-label>
+      <input matInput type="number" placeholder="0"
+             [(ngModel)]="model.unitsOnOrder" />
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Reorder Level</mat-label>
+      <input matInput type="number" placeholder="0"
+             [(ngModel)]="model.reorderLevel" />
+    </mat-form-field>&nbsp;
+    <mat-checkbox [(ngModel)]="model.discontinued">Discontinued</mat-checkbox>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="model" cdkFocusInitial>Save</button>
 </mat-dialog-actions>

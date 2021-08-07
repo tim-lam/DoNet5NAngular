@@ -21,11 +21,18 @@ import { MatSortModule }from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 const routes:Routes=[
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {path: 'products', component: ProductsComponent}];
 
-@NgModule({
+@
+NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
@@ -44,7 +51,12 @@ const routes:Routes=[
     MatSortModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   exports: [RouterModule],
   providers: [ProductsService, CategoriesService, SuppliersService],
